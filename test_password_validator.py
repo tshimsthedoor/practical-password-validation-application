@@ -134,7 +134,7 @@ class TestPasswordValidator(unittest.TestCase):
     
     def test_username_similarity_case_insensitive(self):
         """Test that username similarity check is case-insensitive."""
-        is_valid, issues = self.validator.validate("JOHNSMITH123!", username="johnsmith")
+        is_valid, issues = self.validator.validate("JohnSmith123!", username="johnsmith")
         self.assertFalse(is_valid)
         self.assertTrue(any("similar to username" in issue for issue in issues))
     

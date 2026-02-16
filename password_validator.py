@@ -15,7 +15,7 @@ Key Security Principles:
 
 import re
 import unicodedata
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Any
 from pathlib import Path
 
 
@@ -226,7 +226,7 @@ class PasswordValidator:
         
         return False
     
-    def get_password_strength(self, password: str) -> Dict[str, any]:
+    def get_password_strength(self, password: str) -> Dict[str, Any]:
         """
         Evaluate password strength and return detailed metrics.
         

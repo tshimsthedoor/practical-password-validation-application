@@ -225,7 +225,7 @@ class PasswordValidator:
 
 ## 📊 Test Coverage
 
-The test suite includes:
+Comprehensive test suite with 37 test cases:
 
 - ✅ Valid password acceptance
 - ✅ Length requirement enforcement
