@@ -53,7 +53,8 @@ This password validator implements multiple layers of security checks based on:
 git clone https://github.com/tshimsthedoor/practical-password-validation-application.git
 cd practical-password-validation-application
 
-# No additional dependencies required - uses Python standard library only!
+# Install optional frontend/backend dependencies
+pip install -r requirements.txt
 ```
 
 ### Basic Usage
@@ -161,6 +162,79 @@ The demo showcases:
 - Strength assessment
 - Username similarity detection
 - Pattern detection (sequential, repeated)
+
+## 🖥️ Web Frontend (Streamlit)
+
+A modern web UI is included in `app.py` so you can validate passwords visually.
+The frontend calls the FastAPI backend endpoints (`/validate` and `/strength`).
+
+### Run the frontend
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Start API first (required)
+uvicorn api:app --reload
+
+# Launch web app in a second terminal
+streamlit run app.py
+```
+
+Then open the local URL shown in the terminal (usually `http://localhost:8501`).
+In the sidebar, keep `Backend URL` as `http://127.0.0.1:8000` unless your API runs elsewhere.
+
+## ⚡ Backend API (FastAPI)
+
+A REST API is included in `api.py` for integration with web/mobile apps or other services.
+
+### Run the API
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch API server
+uvicorn api:app --reload
+```
+
+Open API docs at:
+- Swagger UI: `http://127.0.0.1:8000/docs`
+- ReDoc: `http://127.0.0.1:8000/redoc`
+
+### API Endpoints
+
+- `GET /health` → service health check
+- `POST /validate` → validates password policy rules
+- `POST /strength` → returns strength score and feedback
+
+### Example Requests
+
+```bash
+curl -X POST "http://127.0.0.1:8000/validate" \
+    -H "Content-Type: application/json" \
+    -d "{\"password\":\"MySecure!P@ss2026\",\"username\":\"john\"}"
+
+curl -X POST "http://127.0.0.1:8000/strength" \
+    -H "Content-Type: application/json" \
+    -d "{\"password\":\"MySecure!P@ss2026\"}"
+```
+
+## ▶️ Run Both Frontend + API
+
+Use two terminals from the project root:
+
+```bash
+# Terminal 1: API
+uvicorn api:app --reload
+
+# Terminal 2: Frontend
+streamlit run app.py
+```
+
+Then open:
+- Frontend: `http://localhost:8501`
+- API Docs: `http://127.0.0.1:8000/docs`
 
 ## 📋 OWASP Compliance Checklist
 

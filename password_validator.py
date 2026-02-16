@@ -13,8 +13,6 @@ Key Security Principles:
 5. Contextual validation (username similarity)
 """
 
-import re
-import unicodedata
 from typing import List, Dict, Tuple, Any
 from pathlib import Path
 
@@ -314,7 +312,7 @@ class PasswordValidator:
 def validate_password(password: str, username: str = None, 
                      common_passwords_file: str = None) -> Tuple[bool, List[str]]:
     """
-    Convenience function to validate a password.
+    Convenience wrapper around PasswordValidator for one-off checks.
     
     Args:
         password: The password to validate
@@ -324,5 +322,6 @@ def validate_password(password: str, username: str = None,
     Returns:
         Tuple of (is_valid, list_of_issues)
     """
+    # Create validator instance and delegate to class-based validation.
     validator = PasswordValidator(common_passwords_file)
     return validator.validate(password, username)
